@@ -1,13 +1,15 @@
 const express = require('express');
 const connectDB = require('./config/connection');
-const routes = require('./routes');
+const userRoutes = require('./routes/user-routes');
+const thoughtRoutes = require('./routes/thoughts-routes');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(routes);
+app.use('/api/users', userRoutes);
+app.use('/api/thoughts', thoughtRoutes);
 
 connectDB()
   .then(() => {
