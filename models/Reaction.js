@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
-const { Schema, Types } = require("mongoose");
+///const mongoose = require('mongoose');
+const moment = require('moment'); //import required modules
+const { Schema, Types } = require('mongoose');
 
-const ReactionSchema = new Schema(
+const ReactionSchema = new Schema( //reaction schema
     {
         reactionId: {
             type: Schema.Types.ObjectId,
@@ -27,4 +27,4 @@ const ReactionSchema = new Schema(
 
     }
 );
-module.exports = ReactionSchema;
+module.exports = ReactionSchema; //export reaction schema

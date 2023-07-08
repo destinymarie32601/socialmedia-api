@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //import required modules
 const { Schema, model } = mongoose;
 const Thought = require("./Thought");
 
-
-const userSchema = new Schema(
+//user schema
+const userSchema = new Schema( //define the userinput 
     {
     username: {
         type: String,
@@ -16,11 +16,11 @@ const userSchema = new Schema(
         required: true,
         unique: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-    },
-    thoughts: [
+    }, //match to an email
+    thoughts: [ //attatch the thoughts and friends to user
         {
             type:Schema.Types.ObjectId,
-            ref: 'Thought',
+            ref: Thought,
         },
     ],
     friends: [
@@ -43,4 +43,4 @@ userSchema.virtual('friendCount').get(function () {
 
 const User = model('User', userSchema);
 
-module.exports = User;
+module.exports = User; //export user

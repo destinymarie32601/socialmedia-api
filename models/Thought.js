@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //import required modules
 const moment = require('moment');
 const { Schema, model } = mongoose;
 const reactionSchema = require('./Reaction');
 
-const thoughtSchema = new Schema ( 
+const thoughtSchema = new Schema (  //define the thoughts schema
     {
        thoughtText: {
         type:String,
@@ -15,7 +15,7 @@ const thoughtSchema = new Schema (
         type:Date,
         default: Date.now,
         get: function(timestamp) {
-            return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+            return moment(timestamp).format('YYYY-MM-DD');
         }
        },
        username: {
@@ -36,4 +36,4 @@ thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 const Thought = model('Thought', thoughtSchema);
-module.exports = Thought;
+module.exports = Thought; //export thouhgts

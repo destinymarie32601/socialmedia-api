@@ -3,9 +3,6 @@ const { Thought, User } = require("../models");
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find({})
-            .populate({
-                path: "thoughts",
-            })
             .sort({ _id: -1 })
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => {
@@ -15,9 +12,6 @@ const thoughtController = {
     //get to a single thought by its id
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.thoughtId })
-            .populate({
-                path: "thoughts",
-            })
             .then((dbUserData) => {
                 if (!dbUserData) {
                     res.status(404).json({ message: "No thought found with this id" });
@@ -35,7 +29,7 @@ const thoughtController = {
             .then(({ _id }) => {
                 console.log(_id);
                 return User.findOneAndUpdate(
-                    { _id: body.userId },
+                    { _id: params.userId },
                     { $push: { thoughts: _id } },
                     { new: true }
                 );
